@@ -1,0 +1,27 @@
+{
+  "name": "lint-staged-sh",
+  "version": "0.0.1",
+  "description": "> Except bugs, errors and/or strange behavior",
+  "bin": {
+    "lint-staged": "lint-staged.sh"
+  },
+  "files": [
+    "lint-staged.sh"
+  ],
+  "keywords": [
+    "git",
+    "staged",
+    "linter",
+    "workflow"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dalisoft/lint-staged-sh.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dalisoft/lint-staged-sh/issues"
+  },
+  "homepage": "https://github.com/dalisoft/lint-staged-sh#readme",
+  "author": "Davlatjon Shavkatov <opensource@dalisoft.uz>",
+  "license": "GPL-3"
+}
