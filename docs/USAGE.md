@@ -10,7 +10,6 @@ List of contents:
 - [Getting Started](./GET_STARTED.md)
 - [Installation](./INSTALLATION.md)
 - **Usage**
-- [Configuration](./CONFIGURATION.md)
 - [Benchmark](./BENCHMARK.md)
 
 ## Usage
