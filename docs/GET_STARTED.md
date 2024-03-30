@@ -1,0 +1,47 @@
+# lint-staged-sh \[0.x\]
+
+> Except bugs, errors and/or strange behavior
+
+Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `bash` script
+
+List of contents:
+
+- [Github repository](https://github.com/dalisoft/lint-staged-sh)
+- **Getting Started**
+- [Installation](./INSTALLATION.md)
+- [Usage](./USAGE.md)
+- [Configuration](./CONFIGURATION.md)
+- [Benchmark](./BENCHMARK.md)
+
+## Getting Started
+
+Welcome to lint-staged-sh! This tool is designed to streamline your software release process, making it easier to manage versions, changelogs, and deployment. Whether you're working on a small project or a large enterprise application, lint-staged-sh is here to simplify your workflow.
+
+### Prerequisites
+
+Before you start using lint-staged-sh, make sure you have the following installed on your system:
+
+- `bash` (version 5.x or later) with `curl` dependencies
+
+## Features
+
+- Available on all **Unix** environments
+- Zero config
+- Zero dependencies
+- Single file `bash` script
+- No pre-install, just use
+- Programming language agnostic
+
+### Limitations
+
+- Available only in **Unix** environments (no Windows support yet)
+
+## Similar projects
+
+- [lint-staged](https://github.com/lint-staged/lint-staged)
+- [lint-emit-rs](https://crates.io/crates/lint-emit)
+- [offstage-rs](https://crates.io/crates/offstage)
+
+## License
+
+GPL-3
