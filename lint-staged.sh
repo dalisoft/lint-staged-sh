@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-
+#!/bin/sh
 set -eu
 
 # Exports for binaries access
@@ -10,48 +9,53 @@ readonly CLI_PREFIX="[lintstaged-sh]"
 
 # Helpers
 log() {
-  echo -e "$CLI_PREFIX $1"
+  echo "$CLI_PREFIX $1"
 }
 
-MARKDOWN_FILES=()
-TJSX_FILES=()
-JSON_YML_FILES=()
-HTML_FILES=()
-CSS_FILES=()
+MARKDOWN_FILES=""
+TJSX_FILES=""
+JSON_YML_FILES=""
+HTML_FILES=""
+CSS_FILES=""
 
-while read -r file; do
+for file in $(git diff --name-only --cached --diff-filter=ACMR); do
   case "$file" in
   *.md)
-    MARKDOWN_FILES+=("$file")
+    MARKDOWN_FILES="$MARKDOWN_FILES $file"
     ;;
   *.js | *.jsx | *.ts | *.tsx)
-    TJSX_FILES+=("$file")
+    TJSX_FILES="$TJSX_FILES $file"
     ;;
   *.json | *.yml | *.yaml)
-    JSON_YML_FILES+=("$file")
+    JSON_YML_FILES="$JSON_YML_FILES $file"
     ;;
   *.html)
-    HTML_FILES+=("$file")
+    HTML_FILES="$HTML_FILES $file"
     ;;
   *.css | *.scss | *.sass | *.less)
-    CSS_FILES+=("$file")
+    CSS_FILES="$CSS_FILES $file"
     ;;
   esac
-done <<<"$(git diff --name-only --cached --diff-filter=ACMR)"
+done
+
+MARKDOWN_FILES=$(echo "$MARKDOWN_FILES" | awk '{$1=$1}1')
+TJSX_FILES=$(echo "$TJSX_FILES" | awk '{$1=$1}1')
+HTML_FILES=$(echo "$HTML_FILES" | awk '{$1=$1}1')
+CSS_FILES=$(echo "$CSS_FILES" | awk '{$1=$1}1')
 
 # Markdown files
-if [ ${#MARKDOWN_FILES[@]} -gt 0 ]; then
+if [ ${#MARKDOWN_FILES} -gt 1 ]; then
   log "Markdown linting started"
   if [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
     log "Markdown [dprint] linting..."
-    dprint check --log-level=warn "${MARKDOWN_FILES[*]}"
+    dprint check --log-level=warn "${MARKDOWN_FILES}"
     log "Markdown [dprint] linting done"
   else
     log "dprint binary and/or configuration are not installed"
   fi
   if [ "$(command -v markdownlint)" ]; then
     log "Markdown [markdownlint] linting..."
-    markdownlint "${MARKDOWN_FILES[*]}"
+    markdownlint "${MARKDOWN_FILES}"
     log "Markdown [markdownlint] done..."
   else
     log "markdownlint binary is not installed"
@@ -60,12 +64,11 @@ if [ ${#MARKDOWN_FILES[@]} -gt 0 ]; then
 fi
 
 # tsx/ts/jsx/js
-if [ ${#TJSX_FILES[@]} -gt 0 ]; then
-  echo "${TJSX_FILES[@]}"
+if [ ${#TJSX_FILES} -gt 1 ]; then
   log "JS(X)/TS(X) linting started"
   if [ "$(command -v biome)" ] && [ -f "./biome.json" ]; then
     log "JS(X)/TS(X) [biome] linting..."
-    biome check --diagnostic-level=warn "${TJSX_FILES[@]}"
+    biome check --diagnostic-level=warn "${TJSX_FILES}"
     log "JS(X)/TS(X) [biome] linting done"
   else
     log "biome binary and/or configuration are not installed"
@@ -74,16 +77,16 @@ if [ ${#TJSX_FILES[@]} -gt 0 ]; then
 fi
 
 # json/yaml
-if [ ${#JSON_YML_FILES[@]} -gt 0 ]; then
+if [ ${#JSON_YML_FILES} -gt 1 ]; then
   log "JSON/YAML linting started"
   if [ "$(command -v spectral)" ]; then
     log "JSON/YAML [spectral] linting..."
-    spectral lint --ignore-unknown-format "${JSON_YML_FILES[*]}"
+    spectral lint --ignore-unknown-format "${JSON_YML_FILES}"
     log "JSON/YAML [spectral] linting done"
   elif [ "$(command -v jsonymllint)" ]; then
     log "JSON/YAML [jsonyamllint] linting..."
     log "spectral-lint binary is not installed, but we use jsonymllint"
-    jsonymllint "${JSON_YML_FILES[*]}"
+    jsonymllint "${JSON_YML_FILES}"
     log "JSON/YAML [jsonyamllint] linting done"
   else
     log "spectral-lint and jsonymllint binaries is not installed"
@@ -92,11 +95,11 @@ if [ ${#JSON_YML_FILES[@]} -gt 0 ]; then
 fi
 
 # html
-if [ ${#HTML_FILES[@]} -gt 0 ]; then
+if [ ${#HTML_FILES} -gt 1 ]; then
   log "HTML linting started"
   if [ "$(command -v htmllint)" ]; then
     log "HTML [htmllint] linting..."
-    htmllint "${HTML_FILES[*]}"
+    htmllint "${HTML_FILES}"
     log "HTML [htmllint] linting done"
   else
     log "htmlhint binary is not installed"
@@ -105,11 +108,11 @@ if [ ${#HTML_FILES[@]} -gt 0 ]; then
 fi
 
 # css
-if [ ${#CSS_FILES[@]} -gt 0 ]; then
+if [ ${#CSS_FILES} -gt 1 ]; then
   log "CSS linting..."
   if [ "$(command -v stylelint)" ]; then
     log "CSS [stylelint] linting..."
-    stylelint --color "${CSS_FILES[*]}"
+    stylelint --color "${CSS_FILES}"
     log "CSS [stylelint] linting done"
   else
     log "stylelint binary is not installed"
@@ -117,12 +120,12 @@ if [ ${#CSS_FILES[@]} -gt 0 ]; then
   log "CSS linting done\n"
 fi
 
-PRETTIER_FILES=("${MARKDOWN_FILES[@]}" "${TJSX_FILES[@]}" "${JSON_YML_FILES[@]}" "${HTML_FILES[@]}" "${CSS_FILES[@]}")
-log "Prettier overall linting..."
-if [ ${#PRETTIER_FILES[@]} -gt 0 ]; then
+PRETTIER_FILES=$(echo "${MARKDOWN_FILES} ${TJSX_FILES} ${JSON_YML_FILES} ${HTML_FILES} ${CSS_FILES}" | awk '{$1=$1}1')
+if [ ${#PRETTIER_FILES} -gt 4 ]; then
+  log "Prettier overall linting..."
   if [ "$(command -v prettier)" ]; then
     log "Prettier overall linting started"
-    prettier -c "${PRETTIER_FILES[@]}"
+    prettier -c "${PRETTIER_FILES}"
     log "Prettier overall linting done\n"
   fi
 fi
