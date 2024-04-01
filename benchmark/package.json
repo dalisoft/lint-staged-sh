@@ -1,8 +1,12 @@
 {
   "type": "module",
+  "scripts": {
+    "prepare": "lefthook install"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.6.3",
     "@stoplight/spectral-cli": "^6.11.0",
+    "lefthook": "^1.6.7",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5"
   }
