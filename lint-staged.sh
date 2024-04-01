@@ -37,7 +37,7 @@ while read -r file; do
     CSS_FILES+=("$file")
     ;;
   esac
-done <<<"$(git diff --name-only --cached)"
+done <<<"$(git diff --name-only --cached --diff-filter=ACMR)"
 
 # Markdown files
 if [ ${#MARKDOWN_FILES[@]} -gt 0 ]; then
