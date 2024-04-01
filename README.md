@@ -4,14 +4,14 @@
 
 ## Use [lint-staged](https://github.com/lint-staged/lint-staged)
 
-Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `bash` script
+Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `posix shell` script
 
 ## Features
 
 - Available on all **Unix** environments
 - Zero config
 - Zero dependencies
-- Single file `bash` script
+- Single file `posix shell` script
 - No pre-install, just use
 - Programming language agnostic
 
