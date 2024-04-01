@@ -2,7 +2,7 @@
 
 > Except bugs, errors and/or strange behavior
 
-Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `bash` script
+Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `posix shell` script
 
 List of contents:
 
@@ -32,12 +32,12 @@ This project can be used as you wish, local, remote, on CI and/or at VPS. Everyw
 
 #### First-time command
 
-```bash
-curl -s https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh | bash
+```sh
+curl -s https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh | sh
 ```
 
 #### Afterwards command
 
-```bash
+```sh
 ./lint-staged.sh
 ```

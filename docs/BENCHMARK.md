@@ -2,7 +2,7 @@
 
 > Except bugs, errors and/or strange behavior
 
-Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `bash` script
+Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `posix shell` script
 
 List of contents:
 

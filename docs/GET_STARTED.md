@@ -2,7 +2,7 @@
 
 > Except bugs, errors and/or strange behavior
 
-Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `bash` script
+Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `posix shell` script
 
 List of contents:
 
@@ -20,14 +20,14 @@ Welcome to lint-staged-sh! This tool is designed to streamline your software rel
 
 Before you start using lint-staged-sh, make sure you have the following installed on your system:
 
-- `bash` (version 5.x or later) with `curl` dependencies
+- `sh` (version 5.x or later) with `curl` dependencies
 
 ## Features
 
 - Available on all **Unix** environments
 - Zero config
 - Zero dependencies
-- Single file `bash` script
+- Single file `posix shell` script
 - No pre-install, just use
 - Programming language agnostic
 
