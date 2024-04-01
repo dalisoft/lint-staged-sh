@@ -38,6 +38,7 @@ Before you start using lint-staged-sh, make sure you have the following installe
 ## Similar projects
 
 - [lint-staged](https://github.com/lint-staged/lint-staged)
+- [lefthook](https://github.com/evilmartians/lefthook)
 - [lint-emit-rs](https://crates.io/crates/lint-emit)
 - [offstage-rs](https://crates.io/crates/offstage)
 

@@ -22,6 +22,7 @@ Go-to [web-page](https://dalisoft.github.io/lint-staged-sh) or see [**Getting St
 ## Similar projects
 
 - [lint-staged](https://github.com/lint-staged/lint-staged)
+- [lefthook](https://github.com/evilmartians/lefthook)
 - [lint-emit-rs](https://crates.io/crates/lint-emit)
 - [offstage-rs](https://crates.io/crates/offstage)
 
