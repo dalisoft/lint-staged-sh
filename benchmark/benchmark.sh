@@ -17,7 +17,9 @@ cleanup() {
   rm -rf .git tmp.json
 }
 
+# shellcheck disable=SC3045
 export -f prepare
+# shellcheck disable=SC3045
 export -f cleanup
 
 hyperfine --runs 10 --warmup 3 '../lint-staged.sh' 'lint-staged' 'lefthook run pre-commit' --export-markdown "result.md" --setup prepare --cleanup cleanup
