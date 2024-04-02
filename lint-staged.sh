@@ -58,14 +58,14 @@ CSS_FILES=$(echo "$CSS_FILES" | awk '{$1=$1}1')
 if [ ${#SH_FILES} -gt 1 ]; then
   log "Shell linting started"
   if [ "$(command -v shellcheck)" ]; then
-    log "Markdown [dprint] linting..."
+    log "Shell [shellcheck] linting..."
     # shellcheck disable=SC2086
     shellcheck ${SH_FILES}
-    log "Markdown [dprint] linting done"
+    log "Shell [shellcheck] linting done"
   else
-    log "dprint binary and/or configuration are not installed"
+    log "shellcheck binary is not installed"
   fi
-  log "Markdown linting done\n"
+  log "Shell linting done\n"
 fi
 
 # Markdown files
