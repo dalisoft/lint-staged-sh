@@ -24,4 +24,4 @@ jobs:
         shell: bash
         run: |
           sudo apt install shellcheck -y
-          shellcheck *.sh
+          shellcheck **.sh
