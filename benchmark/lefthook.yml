@@ -7,9 +7,13 @@ pre-commit:
       exclude: 'node_modules'
       run: ./node_modules/.bin/biome check --diagnostic-level=warn {staged_files}
     spectral-linter:
-      glob: '*.{json,yaml}'
+      glob: '*.yaml'
       exclude: 'node_modules'
       run: ./node_modules/.bin/spectral lint --ignore-unknown-format {staged_files}
+    jsona-linter:
+      glob: '*.json'
+      exclude: 'node_modules'
+      run: ./node_modules/.bin/jsona fmt --option trailing_newline=true --check {staged_files}
     prettier-formatter:
       glob: '*.{js,jsx,ts,tsx,json,yaml,md}'
       exclude: 'node_modules'

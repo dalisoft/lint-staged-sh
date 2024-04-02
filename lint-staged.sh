@@ -14,7 +14,8 @@ log() {
 
 MARKDOWN_FILES=""
 TJSX_FILES=""
-JSON_YML_FILES=""
+JSON_FILES=""
+YAML_FILES=""
 HTML_FILES=""
 CSS_FILES=""
 
@@ -26,8 +27,11 @@ for file in $(git diff --name-only --cached --diff-filter=ACMR); do
   *.js | *.jsx | *.ts | *.tsx)
     TJSX_FILES="$TJSX_FILES $file"
     ;;
-  *.json | *.yml | *.yaml)
-    JSON_YML_FILES="$JSON_YML_FILES $file"
+  *.json)
+    JSON_FILES="$JSON_FILES $file"
+    ;;
+  *.yml | *.yaml)
+    YAML_FILES="$YAML_FILES $file"
     ;;
   *.html)
     HTML_FILES="$HTML_FILES $file"
@@ -40,6 +44,8 @@ done
 
 MARKDOWN_FILES=$(echo "$MARKDOWN_FILES" | awk '{$1=$1}1')
 TJSX_FILES=$(echo "$TJSX_FILES" | awk '{$1=$1}1')
+JSON_FILES=$(echo "$JSON_FILES" | awk '{$1=$1}1')
+YAML_FILES=$(echo "$YAML_FILES" | awk '{$1=$1}1')
 HTML_FILES=$(echo "$HTML_FILES" | awk '{$1=$1}1')
 CSS_FILES=$(echo "$CSS_FILES" | awk '{$1=$1}1')
 
@@ -76,22 +82,42 @@ if [ ${#TJSX_FILES} -gt 1 ]; then
   log "JS(X)/TS(X) linting done\n"
 fi
 
-# json/yaml
-if [ ${#JSON_YML_FILES} -gt 1 ]; then
-  log "JSON/YAML linting started"
-  if [ "$(command -v spectral)" ]; then
-    log "JSON/YAML [spectral] linting..."
-    spectral lint --ignore-unknown-format "${JSON_YML_FILES}"
-    log "JSON/YAML [spectral] linting done"
-  elif [ "$(command -v jsonymllint)" ]; then
-    log "JSON/YAML [jsonyamllint] linting..."
-    log "spectral-lint binary is not installed, but we use jsonymllint"
-    jsonymllint "${JSON_YML_FILES}"
-    log "JSON/YAML [jsonyamllint] linting done"
+# json
+if [ ${#JSON_FILES} -gt 1 ]; then
+  log "JSON linting started"
+  if [ "$(command -v jsona)" ]; then
+    log "JSON [jsona] linting..."
+    jsona fmt --option trailing_newline=true --check "${JSON_FILES}"
+    log "JSON [jsona] linting done"
+  elif [ "$(command -v spectral)" ]; then
+    if [ -f "./.spectral.yaml" ] || [ -f "./.spectral.yml" ]; then
+      log "JSON [spectral] linting..."
+      spectral lint --ignore-unknown-format "${JSON_FILES}"
+      log "JSON [spectral] linting done"
+    else
+      log "JSON [spectral] config not found"
+    fi
   else
-    log "spectral-lint and jsonymllint binaries is not installed"
+    log "spectral-lint binary is not installed"
   fi
-  log "JSON/YAML linting done\n"
+  log "JSON linting done\n"
+fi
+
+# yaml
+if [ ${#YAML_FILES} -gt 1 ]; then
+  log "YAML linting started"
+  if [ "$(command -v spectral)" ]; then
+    if [ -f "./.spectral.yaml" ] || [ -f "./.spectral.yml" ]; then
+      log "YAML [spectral] linting..."
+      spectral lint --ignore-unknown-format "${YAML_FILES}"
+      log "YAML [spectral] linting done"
+    else
+      log "YAML [spectral] config not found"
+    fi
+  else
+    log "spectral-lint binary is not installed"
+  fi
+  log "YAML linting done\n"
 fi
 
 # html
@@ -120,12 +146,13 @@ if [ ${#CSS_FILES} -gt 1 ]; then
   log "CSS linting done\n"
 fi
 
-PRETTIER_FILES=$(echo "${MARKDOWN_FILES} ${TJSX_FILES} ${JSON_YML_FILES} ${HTML_FILES} ${CSS_FILES}" | awk '{$1=$1}1')
+PRETTIER_FILES=$(echo "${MARKDOWN_FILES} ${TJSX_FILES} ${JSON_FILES} ${YAML_FILES} ${HTML_FILES} ${CSS_FILES}" | awk '{$1=$1}1')
+
 if [ ${#PRETTIER_FILES} -gt 4 ]; then
   log "Prettier overall linting..."
   if [ "$(command -v prettier)" ]; then
     log "Prettier overall linting started"
-    prettier -c "${PRETTIER_FILES}"
+    prettier -c ${PRETTIER_FILES}
     log "Prettier overall linting done\n"
   fi
 fi
