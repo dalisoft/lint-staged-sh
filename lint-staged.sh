@@ -12,6 +12,7 @@ log() {
   echo "$CLI_PREFIX $1"
 }
 
+SH_FILES=""
 MARKDOWN_FILES=""
 TJSX_FILES=""
 JSON_FILES=""
@@ -21,6 +22,9 @@ CSS_FILES=""
 
 for file in $(git diff --name-only --cached --diff-filter=ACMR); do
   case "$file" in
+  *.sh | *.bash)
+    SH_FILES="$SH_FILES $file"
+    ;;
   *.md)
     MARKDOWN_FILES="$MARKDOWN_FILES $file"
     ;;
@@ -42,6 +46,7 @@ for file in $(git diff --name-only --cached --diff-filter=ACMR); do
   esac
 done
 
+SH_FILES=$(echo "$SH_FILES" | awk '{$1=$1}1')
 MARKDOWN_FILES=$(echo "$MARKDOWN_FILES" | awk '{$1=$1}1')
 TJSX_FILES=$(echo "$TJSX_FILES" | awk '{$1=$1}1')
 JSON_FILES=$(echo "$JSON_FILES" | awk '{$1=$1}1')
@@ -49,19 +54,35 @@ YAML_FILES=$(echo "$YAML_FILES" | awk '{$1=$1}1')
 HTML_FILES=$(echo "$HTML_FILES" | awk '{$1=$1}1')
 CSS_FILES=$(echo "$CSS_FILES" | awk '{$1=$1}1')
 
+# Shell files
+if [ ${#SH_FILES} -gt 1 ]; then
+  log "Shell linting started"
+  if [ "$(command -v shellcheck)" ]; then
+    log "Markdown [dprint] linting..."
+    # shellcheck disable=SC2086
+    shellcheck ${SH_FILES}
+    log "Markdown [dprint] linting done"
+  else
+    log "dprint binary and/or configuration are not installed"
+  fi
+  log "Markdown linting done\n"
+fi
+
 # Markdown files
 if [ ${#MARKDOWN_FILES} -gt 1 ]; then
   log "Markdown linting started"
   if [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
     log "Markdown [dprint] linting..."
-    dprint check --log-level=warn "${MARKDOWN_FILES}"
+    # shellcheck disable=SC2086
+    dprint check --log-level=warn ${MARKDOWN_FILES}
     log "Markdown [dprint] linting done"
   else
     log "dprint binary and/or configuration are not installed"
   fi
   if [ "$(command -v markdownlint)" ]; then
     log "Markdown [markdownlint] linting..."
-    markdownlint "${MARKDOWN_FILES}"
+    # shellcheck disable=SC2086
+    markdownlint ${MARKDOWN_FILES}
     log "Markdown [markdownlint] done..."
   else
     log "markdownlint binary is not installed"
@@ -74,7 +95,8 @@ if [ ${#TJSX_FILES} -gt 1 ]; then
   log "JS(X)/TS(X) linting started"
   if [ "$(command -v biome)" ] && [ -f "./biome.json" ]; then
     log "JS(X)/TS(X) [biome] linting..."
-    biome check --diagnostic-level=warn "${TJSX_FILES}"
+    # shellcheck disable=SC2086
+    biome check --diagnostic-level=warn ${TJSX_FILES}
     log "JS(X)/TS(X) [biome] linting done"
   else
     log "biome binary and/or configuration are not installed"
@@ -87,12 +109,14 @@ if [ ${#JSON_FILES} -gt 1 ]; then
   log "JSON linting started"
   if [ "$(command -v jsona)" ]; then
     log "JSON [jsona] linting..."
-    jsona fmt --option trailing_newline=true --check "${JSON_FILES}"
+    # shellcheck disable=SC2086
+    jsona fmt --option trailing_newline=true --check ${JSON_FILES}
     log "JSON [jsona] linting done"
   elif [ "$(command -v spectral)" ]; then
     if [ -f "./.spectral.yaml" ] || [ -f "./.spectral.yml" ]; then
       log "JSON [spectral] linting..."
-      spectral lint --ignore-unknown-format "${JSON_FILES}"
+      # shellcheck disable=SC2086
+      spectral lint --ignore-unknown-format ${JSON_FILES}
       log "JSON [spectral] linting done"
     else
       log "JSON [spectral] config not found"
@@ -109,7 +133,8 @@ if [ ${#YAML_FILES} -gt 1 ]; then
   if [ "$(command -v spectral)" ]; then
     if [ -f "./.spectral.yaml" ] || [ -f "./.spectral.yml" ]; then
       log "YAML [spectral] linting..."
-      spectral lint --ignore-unknown-format "${YAML_FILES}"
+      # shellcheck disable=SC2086
+      spectral lint --ignore-unknown-format ${YAML_FILES}
       log "YAML [spectral] linting done"
     else
       log "YAML [spectral] config not found"
@@ -125,7 +150,8 @@ if [ ${#HTML_FILES} -gt 1 ]; then
   log "HTML linting started"
   if [ "$(command -v htmllint)" ]; then
     log "HTML [htmllint] linting..."
-    htmllint "${HTML_FILES}"
+    # shellcheck disable=SC2086
+    htmllint ${HTML_FILES}
     log "HTML [htmllint] linting done"
   else
     log "htmlhint binary is not installed"
@@ -138,7 +164,8 @@ if [ ${#CSS_FILES} -gt 1 ]; then
   log "CSS linting..."
   if [ "$(command -v stylelint)" ]; then
     log "CSS [stylelint] linting..."
-    stylelint --color "${CSS_FILES}"
+    # shellcheck disable=SC2086
+    stylelint --color ${CSS_FILES}
     log "CSS [stylelint] linting done"
   else
     log "stylelint binary is not installed"
@@ -152,6 +179,7 @@ if [ ${#PRETTIER_FILES} -gt 4 ]; then
   log "Prettier overall linting..."
   if [ "$(command -v prettier)" ]; then
     log "Prettier overall linting started"
+    # shellcheck disable=SC2086
     prettier -c ${PRETTIER_FILES}
     log "Prettier overall linting done\n"
   fi
