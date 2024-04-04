@@ -8,3 +8,4 @@ ls:
 
 ignore:
   - node_modules
+  - benchmark/node_modules

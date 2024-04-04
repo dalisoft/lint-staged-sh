@@ -2,4 +2,4 @@ pre-push:
   parallel: true
   commands:
     ls-linter:
-      run: ls-lint
+      run: ./node_modules/.bin/ls-lint
