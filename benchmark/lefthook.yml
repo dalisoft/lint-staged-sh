@@ -1,20 +1,19 @@
 pre-commit:
   parallel: true
-  follow: true
   commands:
     biome-linter:
-      glob: '*.{js,jsx,ts,tsx}'
-      exclude: 'node_modules'
+      glob: "*.{js,jsx,ts,tsx}"
+      exclude: "node_modules"
       run: ./node_modules/.bin/biome check --diagnostic-level=warn {staged_files}
     spectral-linter:
-      glob: '*.yaml'
-      exclude: 'node_modules'
+      glob: "*.yaml"
+      exclude: "node_modules"
       run: ./node_modules/.bin/spectral lint --ignore-unknown-format {staged_files}
     jsona-linter:
-      glob: '*.json'
-      exclude: 'node_modules'
+      glob: "*.json"
+      exclude: "node_modules"
       run: ./node_modules/.bin/jsona fmt --option trailing_newline=true --check {staged_files}
     prettier-formatter:
-      glob: '*.{js,jsx,ts,tsx,json,yaml,md}'
-      exclude: 'node_modules'
+      glob: "*.{js,jsx,ts,tsx,json,yaml,md}"
+      exclude: "node_modules"
       run: ./node_modules/.bin/prettier -c {staged_files}
