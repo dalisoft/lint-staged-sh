@@ -1,0 +1,10 @@
+ls:
+  .js: kebab-case
+  .ts: kebab-case
+  .d.ts: kebab-case
+  .spec.ts: kebab-case
+  .mock.ts: kebab-case
+  .*rc: point.case
+
+ignore:
+  - node_modules
