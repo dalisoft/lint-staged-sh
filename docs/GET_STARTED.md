@@ -31,6 +31,19 @@ Before you start using lint-staged-sh, make sure you have the following installe
 - No pre-install, just use
 - Programming language agnostic
 
+## Linter dependencies
+
+Install as dependency or as a global dependency one, some or all of those linters to use them. `lint-staged-sh` detects smartly if it available
+
+- [shellcheck](https://github.com/koalaman/shellcheck)
+- [dprint](https://github.com/dprint/dprint) or [markdownlint](https://github.com/DavidAnson/markdownlint)
+- [biome](https://github.com/biomejs/biome)
+- [jsona](https://github.com/jsona/jsona) or [spectral](https://github.com/stoplightio/spectral)
+- [htmlhint](https://github.com/htmlhint/HTMLHint)
+- [stylelint](https://github.com/stylelint/stylelint)
+- [prettier](https://github.com/prettier/prettier)
+- [Dockerfilelint](https://github.com/replicatedhq/dockerfilelint)
+
 ### Limitations
 
 - Available only in **Unix** environments (no Windows support yet)
