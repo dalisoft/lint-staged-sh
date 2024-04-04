@@ -20,7 +20,7 @@ Welcome to lint-staged-sh! This tool is designed to streamline your software rel
 
 Before you start using lint-staged-sh, make sure you have the following installed on your system:
 
-- `sh` (version 5.x or later) with `curl` dependencies
+- `posix sh` and `curl` with required dependencies
 
 ## Features
 
