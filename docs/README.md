@@ -17,7 +17,7 @@ Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `posix
 
 ## Documentation
 
-Go-to [web-page](https://dalisoft.github.io/lint-staged-sh) or see [**Getting Started**](./GET_STARTED.md)
+Go-to [repository](https://github.com/dalisoft/lint-staged-sh) or see [**Getting Started**](./GET_STARTED.md)
 
 ## Similar projects
 
