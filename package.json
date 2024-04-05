@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/dalisoft/lint-staged-sh/issues"
   },
-  "description": "Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `posix shell` script",
+  "description": "Zero-dependency, zero-config, zero-install, single-file `lint-staged` `posix shell` script",
   "files": [
     "lint-staged.sh"
   ],

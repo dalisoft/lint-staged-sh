@@ -4,7 +4,7 @@
 
 ## Use [lint-staged](https://github.com/lint-staged/lint-staged)
 
-Zero-dependency, zero-config, zero-install, single-file `lint-staged` PoC `posix shell` script
+Zero-dependency, zero-config, zero-install, single-file `lint-staged` `posix shell` script
 
 ## Features
 
