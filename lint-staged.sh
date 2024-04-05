@@ -112,7 +112,7 @@ if [ ${#JSON_FILES} -gt 1 ]; then
     # shellcheck disable=SC2086
     jsona fmt --option trailing_newline=true --check ${JSON_FILES}
     log "JSON [jsona] linting done"
-  elif [ "$(command -v dprint)" ] && [ -f "./biome.json" ]; then
+  elif [ "$(command -v biome)" ] && [ -f "./biome.json" ]; then
     log "jsona binary is not installed but biome binary was found"
     log "JSON [biome] linting..."
     # shellcheck disable=SC2086
