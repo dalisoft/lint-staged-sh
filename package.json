@@ -1,31 +1,31 @@
 {
   "name": "lint-staged-sh",
   "version": "0.3.4",
-  "author": "Davlatjon Shavkatov <opensource@dalisoft.uz>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dalisoft/lint-staged-sh.git"
-  },
+  "description": "Zero-dependency, zero-config, zero-install, single-file `lint-staged` `posix shell` script",
   "bin": {
     "lint-staged": "lint-staged.sh"
   },
-  "bugs": {
-    "url": "https://github.com/dalisoft/lint-staged-sh/issues"
-  },
-  "description": "Zero-dependency, zero-config, zero-install, single-file `lint-staged` `posix shell` script",
   "files": [
     "lint-staged.sh"
   ],
-  "homepage": "https://github.com/dalisoft/lint-staged-sh#readme",
+  "author": "Davlatjon Shavkatov <opensource@dalisoft.uz>",
   "keywords": [
     "git",
     "staged",
     "linter",
     "workflow"
   ],
-  "license": "GPL-3",
   "devDependencies": {
     "@ls-lint/ls-lint": "^2.2.3",
     "lefthook": "^1.6.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dalisoft/lint-staged-sh.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dalisoft/lint-staged-sh/issues"
+  },
+  "homepage": "https://github.com/dalisoft/lint-staged-sh#readme",
+  "license": "GPL-3"
 }
