@@ -18,9 +18,7 @@ This project can be used as you wish, local, remote, on CI and/or at VPS. Everyw
 
 ### Requirements
 
-> See [Getting Started](./GET_STARTED.md) page if you didn't read
-
-- **bash** version **v5+** for best reliability
+See [Getting Started](./GET_STARTED.md) page if you didn't read
 
 ### Preparation
 
