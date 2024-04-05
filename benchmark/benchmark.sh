@@ -4,22 +4,23 @@ set -eu
 # Exports for binaries access
 export PATH="./node_modules/.bin:$PATH"
 
-prepare() {
+setup() {
   echo '{ "foo": "bar" }' >>tmp.json
+  cp ../README.md ./README.md
   git init
   git add -A tmp.json
   git commit -m "initial commit"
-  git add -Af package.json result.md
+
+  git add -Af package.json README.md
 }
 
 cleanup() {
-  git rm -f result.md --cached
   rm -rf .git tmp.json
 }
 
 # shellcheck disable=SC3045
-export -f prepare
+export -f setup
 # shellcheck disable=SC3045
 export -f cleanup
 
-hyperfine --runs 10 --warmup 3 '../lint-staged.sh' 'lint-staged' 'lefthook run pre-commit' --export-markdown "result.md" --setup prepare --cleanup cleanup
+hyperfine --runs 5 '../lint-staged.sh' 'lint-staged' 'lefthook run pre-commit' --export-markdown "result.md" --setup setup --cleanup cleanup

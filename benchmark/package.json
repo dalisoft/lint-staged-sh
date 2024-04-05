@@ -6,6 +6,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.6.3",
     "@stoplight/spectral-cli": "^6.11.0",
+    "dprint-rs-npm": "^0.45.1",
     "jsona-rs-npm": "^0.6.0",
     "lefthook": "^1.6.7",
     "lint-staged": "^15.2.2",
