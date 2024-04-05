@@ -31,7 +31,9 @@ See [Getting Started](./GET_STARTED.md) page if you didn't read
 #### First-time command
 
 ```sh
-curl -s https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh | sh
+curl -O https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh
+chmod +x ./lint-staged.sh
+./lint-staged.sh
 ```
 
 #### Afterwards command
