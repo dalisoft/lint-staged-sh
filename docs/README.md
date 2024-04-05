@@ -1,4 +1,4 @@
-# lint-staged-sh \[0.x\] \[PROOF-OF-CONCEPT\]
+# lint-staged-sh \[0.x\]
 
 > Except bugs, errors and/or strange behavior
 
