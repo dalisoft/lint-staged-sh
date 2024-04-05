@@ -112,18 +112,18 @@ if [ ${#JSON_FILES} -gt 1 ]; then
     # shellcheck disable=SC2086
     jsona fmt --option trailing_newline=true --check ${JSON_FILES}
     log "JSON [jsona] linting done"
-  elif [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
-    log "jsona binary is not installed but dprint binary was found"
-    log "JSON [dprint] linting..."
-    # shellcheck disable=SC2086
-    dprint check ${JSON_FILES}
-    log "JSON [dprint] linting done"
-  elif [ "$(command -v biome)" ] && [ -f "./biome.json" ]; then
-    log "jsona and dprint binaries are not installed but biome binary was found"
+  elif [ "$(command -v dprint)" ] && [ -f "./biome.json" ]; then
+    log "jsona binary is not installed but biome binary was found"
     log "JSON [biome] linting..."
     # shellcheck disable=SC2086
     biome format ${JSON_FILES}
     log "JSON [biome] linting done"
+  elif [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
+    log "jsona and biome binaries are not installed but dprint binary was found"
+    log "JSON [dprint] linting..."
+    # shellcheck disable=SC2086
+    dprint check ${JSON_FILES}
+    log "JSON [dprint] linting done"
   else
     log "jsona, dprint and biome binaries are not installed"
   fi
