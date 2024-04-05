@@ -4,11 +4,15 @@ pre-commit:
     biome-linter:
       glob: "*.{js,jsx,ts,tsx}"
       exclude: "node_modules"
-      run: ./node_modules/.bin/biome check --diagnostic-level=warn {staged_files}
+      run: ./node_modules/.bin/biome format {staged_files}
     spectral-linter:
       glob: "*.yaml"
       exclude: "node_modules"
       run: ./node_modules/.bin/spectral lint --ignore-unknown-format {staged_files}
+    md-linter:
+      glob: "*.json"
+      exclude: "node_modules"
+      run: ./node_modules/.bin/dprint check {staged_files}
     jsona-linter:
       glob: "*.json"
       exclude: "node_modules"

@@ -1,6 +1,7 @@
 {
-  "*.{js,jsx,ts,tsx}": "biome check --diagnostic-level=warn",
+  "*.{js,jsx,ts,tsx}": "biome format",
   "*.json": "jsona fmt --option trailing_newline=true --check",
   "*.yaml": "spectral lint --ignore-unknown-format",
-  "*.{js,jsx,ts,tsx,json,yaml,md}": "prettier -c"
+  "*.md": "dprint check",
+  "*.{js,jsx,ts,tsx,json,yaml}": "prettier -c"
 }
