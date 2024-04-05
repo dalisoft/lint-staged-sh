@@ -71,6 +71,15 @@ fi
 # Markdown files
 if [ ${#MARKDOWN_FILES} -gt 1 ]; then
   log "Markdown linting started"
+
+  if [ "$(command -v markdownlint-cli2)" ]; then
+    log "Markdown [markdownlint-cli2] linting..."
+    # shellcheck disable=SC2086
+    markdownlint-cli2 ${MARKDOWN_FILES}
+    log "Markdown [markdownlint-cli2] done..."
+  else
+    log "markdownlint-cli2 binary is not installed"
+  fi
   if [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
     log "Markdown [dprint] linting..."
     # shellcheck disable=SC2086
@@ -78,14 +87,6 @@ if [ ${#MARKDOWN_FILES} -gt 1 ]; then
     log "Markdown [dprint] linting done"
   else
     log "dprint binary and/or configuration are not installed"
-  fi
-  if [ "$(command -v markdownlint)" ]; then
-    log "Markdown [markdownlint] linting..."
-    # shellcheck disable=SC2086
-    markdownlint ${MARKDOWN_FILES}
-    log "Markdown [markdownlint] done..."
-  else
-    log "markdownlint binary is not installed"
   fi
   log "Markdown linting done\n"
 fi
