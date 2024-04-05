@@ -72,22 +72,21 @@ fi
 if [ ${#MARKDOWN_FILES} -gt 1 ]; then
   log "Markdown linting started"
 
-  if [ "$(command -v markdownlint-cli2)" ]; then
+  if [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
+    log "Markdown [dprint] linting..."
+    # shellcheck disable=SC2086
+    dprint check ${MARKDOWN_FILES}
+    log "Markdown [dprint] linting done"
+  elif [ "$(command -v markdownlint-cli2)" ]; then
+    log "dprint binary and/or configuration are not installed but markdownlint-cli2 binary was found"
     log "Markdown [markdownlint-cli2] linting..."
     # shellcheck disable=SC2086
     markdownlint-cli2 ${MARKDOWN_FILES}
     log "Markdown [markdownlint-cli2] done..."
   else
-    log "markdownlint-cli2 binary is not installed"
+    log "dprint and markdownlint-cli2 binaries are not installed"
   fi
-  if [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
-    log "Markdown [dprint] linting..."
-    # shellcheck disable=SC2086
-    dprint check --log-level=warn ${MARKDOWN_FILES}
-    log "Markdown [dprint] linting done"
-  else
-    log "dprint binary and/or configuration are not installed"
-  fi
+
   log "Markdown linting done\n"
 fi
 
@@ -113,17 +112,20 @@ if [ ${#JSON_FILES} -gt 1 ]; then
     # shellcheck disable=SC2086
     jsona fmt --option trailing_newline=true --check ${JSON_FILES}
     log "JSON [jsona] linting done"
-  elif [ "$(command -v spectral)" ]; then
-    if [ -f "./.spectral.yaml" ] || [ -f "./.spectral.yml" ]; then
-      log "JSON [spectral] linting..."
-      # shellcheck disable=SC2086
-      spectral lint --ignore-unknown-format ${JSON_FILES}
-      log "JSON [spectral] linting done"
-    else
-      log "JSON [spectral] config not found"
-    fi
+  elif [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
+    log "jsona binary is not installed but dprint binary was found"
+    log "JSON [dprint] linting..."
+    # shellcheck disable=SC2086
+    dprint check ${JSON_FILES}
+    log "JSON [dprint] linting done"
+  elif [ "$(command -v biome)" ] && [ -f "./biome.json" ]; then
+    log "jsona and dprint binaries are not installed but biome binary was found"
+    log "JSON [biome] linting..."
+    # shellcheck disable=SC2086
+    biome format ${JSON_FILES}
+    log "JSON [biome] linting done"
   else
-    log "spectral-lint binary is not installed"
+    log "jsona, dprint and biome binaries are not installed"
   fi
   log "JSON linting done\n"
 fi
