@@ -5,6 +5,7 @@ set -eu
 export PATH="./node_modules/.bin:$PATH"
 
 setup() {
+  rm -rf tmp.json
   echo '{ "foo": "bar" }' >>tmp.json
   cp ../README.md ./README.md
   git init

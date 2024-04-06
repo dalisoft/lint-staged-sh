@@ -3,5 +3,5 @@
   "*.json": "jsona fmt --option trailing_newline=true --check",
   "*.yaml": "spectral lint --ignore-unknown-format",
   "*.md": "dprint check",
-  "*.{js,jsx,ts,tsx,json,yaml}": "prettier -c"
+  "*.{js,jsx,ts,tsx,yaml}": "prettier -c"
 }

@@ -1,5 +1,6 @@
 pre-commit:
   parallel: true
+  follow: true
   commands:
     biome-linter:
       glob: "*.{js,jsx,ts,tsx}"
@@ -18,6 +19,6 @@ pre-commit:
       exclude: "node_modules"
       run: ./node_modules/.bin/jsona fmt --option trailing_newline=true --check {staged_files}
     prettier-formatter:
-      glob: "*.{js,jsx,ts,tsx,json,yaml,md}"
+      glob: "*.{js,jsx,ts,tsx,yaml}"
       exclude: "node_modules"
       run: ./node_modules/.bin/prettier -c {staged_files}
