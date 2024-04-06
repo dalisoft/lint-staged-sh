@@ -1,6 +1,6 @@
 {
   "name": "lint-staged-sh",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Zero-dependency, zero-config, zero-install, single-file `lint-staged` `posix shell` script",
   "bin": {
     "lint-staged": "lint-staged.sh"
