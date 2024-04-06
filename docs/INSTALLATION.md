@@ -21,7 +21,28 @@ This project can be installed many ways but here we'll provide some ways
 ```sh
 curl -O https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh
 chmod +x ./lint-staged.sh
-./lint-staged.sh
+```
+
+### Husky integration
+
+```sh
+mv ./lint-staged.sh .husky/pre-commit
+```
+
+### Lefthook
+
+```sh
+mkdir -p .lefthook
+mv ./lint-staged.sh .lefthook/pre-commit/lint-staged.sh
+```
+
+then add `.lefthook` folder to your `git` and add this to your `lefthook` configuration
+
+```yml
+pre-commit:
+  scripts:
+    "lint-staged.sh":
+      runner: sh
 ```
 
 ## Linter dependencies
@@ -36,9 +57,3 @@ Install as dependency or as a global dependency one, some or all of those linter
 - [stylelint](https://github.com/stylelint/stylelint)
 - [prettier](https://github.com/prettier/prettier)
 - [Dockerfilelint](https://github.com/replicatedhq/dockerfilelint)
-
-### Afterwards command
-
-```sh
-./lint-staged.sh
-```

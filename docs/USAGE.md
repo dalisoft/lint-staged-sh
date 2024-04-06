@@ -20,24 +20,33 @@ This project can be used as you wish, local, remote, on CI and/or at VPS. Everyw
 
 See [Getting Started](./GET_STARTED.md) page if you didn't read
 
-### Preparation
+Below guide same as [Installation](./INSTALLATION.md#installation)
 
-- Add `lint-staged.sh` to `.gitignore`
-- Add your `.gitignore` to commit
-- Push into remote
-
-### Commands
-
-#### First-time command
+### First-time installation
 
 ```sh
 curl -O https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh
 chmod +x ./lint-staged.sh
-./lint-staged.sh
 ```
 
-#### Afterwards command
+### Husky integration
 
 ```sh
-./lint-staged.sh
+mv ./lint-staged.sh .husky/pre-commit
+```
+
+### Lefthook
+
+```sh
+mkdir -p .lefthook
+mv ./lint-staged.sh .lefthook/pre-commit/lint-staged.sh
+```
+
+then add `.lefthook` folder to your `git` and add this to your `lefthook` configuration
+
+```yml
+pre-commit:
+  scripts:
+    "lint-staged.sh":
+      runner: sh
 ```
