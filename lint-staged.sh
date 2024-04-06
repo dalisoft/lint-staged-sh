@@ -31,7 +31,7 @@ for file in $(git diff --name-only --cached --diff-filter=ACMR); do
   *.js | *.jsx | *.ts | *.tsx)
     TJSX_FILES="$TJSX_FILES $file"
     ;;
-  *.json)
+  *.json | *.jsonc | *.jsona)
     JSON_FILES="$JSON_FILES $file"
     ;;
   *.yml | *.yaml)
@@ -53,6 +53,8 @@ JSON_FILES=$(echo "$JSON_FILES" | awk '{$1=$1}1')
 YAML_FILES=$(echo "$YAML_FILES" | awk '{$1=$1}1')
 HTML_FILES=$(echo "$HTML_FILES" | awk '{$1=$1}1')
 CSS_FILES=$(echo "$CSS_FILES" | awk '{$1=$1}1')
+
+PRETTIER_FILES=""
 
 # Shell files
 if [ ${#SH_FILES} -gt 1 ]; then
@@ -84,6 +86,7 @@ if [ ${#MARKDOWN_FILES} -gt 1 ]; then
     markdownlint-cli2 ${MARKDOWN_FILES}
     log "Markdown [markdownlint-cli2] done..."
   else
+    PRETTIER_FILES="$PRETTIER_FILES $MARKDOWN_FILES"
     log "dprint and markdownlint-cli2 binaries are not installed"
   fi
 
@@ -96,9 +99,10 @@ if [ ${#TJSX_FILES} -gt 1 ]; then
   if [ "$(command -v biome)" ] && [ -f "./biome.json" ]; then
     log "JS(X)/TS(X) [biome] linting..."
     # shellcheck disable=SC2086
-    biome check --diagnostic-level=warn ${TJSX_FILES}
+    biome check ${TJSX_FILES}
     log "JS(X)/TS(X) [biome] linting done"
   else
+    PRETTIER_FILES="$PRETTIER_FILES $TJSX_FILES"
     log "biome binary and/or configuration are not installed"
   fi
   log "JS(X)/TS(X) linting done\n"
@@ -125,6 +129,7 @@ if [ ${#JSON_FILES} -gt 1 ]; then
     dprint check ${JSON_FILES}
     log "JSON [dprint] linting done"
   else
+    PRETTIER_FILES="$PRETTIER_FILES $JSON_FILES"
     log "jsona, dprint and biome binaries are not installed"
   fi
   log "JSON linting done\n"
@@ -145,6 +150,7 @@ if [ ${#YAML_FILES} -gt 1 ]; then
   else
     log "spectral-lint binary is not installed"
   fi
+  PRETTIER_FILES="$PRETTIER_FILES $YAML_FILES"
   log "YAML linting done\n"
 fi
 
@@ -159,6 +165,7 @@ if [ ${#HTML_FILES} -gt 1 ]; then
   else
     log "htmlhint binary is not installed"
   fi
+  PRETTIER_FILES="$PRETTIER_FILES $HTML_FILES"
   log "HTML linting done\n"
 fi
 
@@ -173,10 +180,11 @@ if [ ${#CSS_FILES} -gt 1 ]; then
   else
     log "stylelint binary is not installed"
   fi
+  PRETTIER_FILES="$PRETTIER_FILES $CSS_FILES"
   log "CSS linting done\n"
 fi
 
-PRETTIER_FILES=$(echo "${MARKDOWN_FILES} ${TJSX_FILES} ${JSON_FILES} ${YAML_FILES} ${HTML_FILES} ${CSS_FILES}" | awk '{$1=$1}1')
+PRETTIER_FILES=$(echo "${PRETTIER_FILES}" | awk '{$1=$1}1')
 
 if [ ${#PRETTIER_FILES} -gt 4 ]; then
   log "Prettier overall linting..."
