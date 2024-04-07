@@ -1,6 +1,6 @@
 {
   "name": "lint-staged-sh",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Zero-dependency, zero-config, zero-install, single-file `lint-staged` `posix shell` script",
   "bin": {
     "lint-staged": "lint-staged.sh"
@@ -17,6 +17,8 @@
   ],
   "devDependencies": {
     "@ls-lint/ls-lint": "^2.2.3",
+    "biome-rs-npm": "^1.6.4-d",
+    "dprint-rs-npm": "^0.45.1-d",
     "lefthook": "^1.6.8"
   },
   "repository": {

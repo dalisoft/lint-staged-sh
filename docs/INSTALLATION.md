@@ -50,7 +50,7 @@ pre-commit:
 Install as dependency or as a global dependency one, some or all of those linters to use them. `lint-staged-sh` detects smartly if it available
 
 - [shellcheck](https://github.com/koalaman/shellcheck)
-- [dprint](https://github.com/dprint/dprint) or [markdownlint](https://github.com/DavidAnson/markdownlint)
+- [dprint](https://github.com/dprint/dprint) and [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
 - [biome](https://github.com/biomejs/biome)
 - [jsona](https://github.com/jsona/jsona) or [spectral](https://github.com/stoplightio/spectral)
 - [htmlhint](https://github.com/htmlhint/HTMLHint)

@@ -74,20 +74,22 @@ fi
 if [ ${#MARKDOWN_FILES} -gt 1 ]; then
   log "Markdown linting started"
 
-  if [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
-    log "Markdown [dprint] linting..."
-    # shellcheck disable=SC2086
-    dprint check ${MARKDOWN_FILES}
-    log "Markdown [dprint] linting done"
-  elif [ "$(command -v markdownlint-cli2)" ]; then
-    log "dprint binary and/or configuration are not installed but markdownlint-cli2 binary was found"
+  if [ "$(command -v markdownlint-cli2)" ]; then
     log "Markdown [markdownlint-cli2] linting..."
     # shellcheck disable=SC2086
     markdownlint-cli2 ${MARKDOWN_FILES}
     log "Markdown [markdownlint-cli2] done..."
   else
+    log "markdownlint-cli2 binary is not installed"
+  fi
+  if [ "$(command -v dprint)" ] && [ -f "./dprint.json" ]; then
+    log "Markdown [dprint] linting..."
+    # shellcheck disable=SC2086
+    dprint check ${MARKDOWN_FILES}
+    log "Markdown [dprint] linting done"
+  else
     PRETTIER_FILES="$PRETTIER_FILES $MARKDOWN_FILES"
-    log "dprint and markdownlint-cli2 binaries are not installed"
+    log "dprint binary is not installed"
   fi
 
   log "Markdown linting done\n"
