@@ -10,6 +10,10 @@ pre-commit:
       glob: "*.yaml"
       exclude: "node_modules"
       run: ./node_modules/.bin/spectral lint --ignore-unknown-format {staged_files}
+    md-cli-linter:
+      glob: "*.md"
+      exclude: "node_modules"
+      run: ./node_modules/.bin/markdownlint-cli2 {staged_files}
     md-linter:
       glob: "*.md"
       exclude: "node_modules"

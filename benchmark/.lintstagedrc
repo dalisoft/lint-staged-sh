@@ -2,6 +2,6 @@
   "*.{js,jsx,ts,tsx}": "biome format",
   "*.json": "jsona fmt --option trailing_newline=true --check",
   "*.yaml": "spectral lint --ignore-unknown-format",
-  "*.md": "dprint check",
+  "*.md": ["markdownlint-cli2", "dprint check"],
   "*.{js,jsx,ts,tsx,yaml}": "prettier -c"
 }
