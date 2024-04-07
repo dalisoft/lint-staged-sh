@@ -2,7 +2,7 @@
 
 > Except bugs, errors and/or strange behavior
 
-Zero-dependency, zero-config, zero-install, single-file `lint-staged` `posix shell` script
+Zero-{dependency,config,install,file} single-file `lint-staged` `posix shell` script
 
 List of contents:
 
