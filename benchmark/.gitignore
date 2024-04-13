@@ -3,6 +3,7 @@ node_modules
 
 # Binaries
 commitlint-*
+lefthook
 
 # Lockfile
 bun.lockb
