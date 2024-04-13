@@ -19,7 +19,7 @@ This project can be installed many ways but here we'll provide some ways
 ### First-time installation
 
 ```sh
-curl -O https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh
+curl -fsSLO https://raw.githubusercontent.com/dalisoft/lint-staged-sh/master/lint-staged.sh
 chmod +x ./lint-staged.sh
 ```
 
