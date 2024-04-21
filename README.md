@@ -2,7 +2,7 @@
 
 > Except bugs, errors and/or strange behavior
 
-## Use [lint-staged](https://github.com/lint-staged/lint-staged)
+## Use [lefthook](https://github.com/evilmartians/lefthook)
 
 Zero-{dependency,config,install,file} single-file `lint-staged` `posix shell` script
 
@@ -17,7 +17,8 @@ Zero-{dependency,config,install,file} single-file `lint-staged` `posix shell` sc
 
 ## Documentation
 
-Go-to [web-page](https://dalisoft.github.io/lint-staged-sh) or see [**Getting Started**](./docs/GET_STARTED.md)
+Go-to [web-page](https://dalisoft.github.io/lint-staged-sh) or see
+[**Getting Started**](./docs/GET_STARTED.md)
 
 ## Similar projects
 
