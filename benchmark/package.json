@@ -4,7 +4,7 @@
     "prepare": "lefthook install"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.4",
+    "@biomejs/biome": "1.7.0",
     "@stoplight/spectral-cli": "^6.11.1",
     "binary2npm": "^0.3.2",
     "dprint-rs-npm": "^0.45.1",
