@@ -16,10 +16,10 @@
     "workflow"
   ],
   "devDependencies": {
+    "@evilmartians/lefthook": "^1.6.10",
     "@ls-lint/ls-lint": "^2.2.3",
-    "biome-rs-npm": "^1.6.4-d",
-    "dprint-rs-npm": "^0.45.1-d",
-    "lefthook": "^1.6.8"
+    "biome-rs-npm": "dalisoft/biome-rs-npm#v1.7.0",
+    "dprint-rs-npm": "dalisoft/dprint-rs-npm#v0.45.1"
   },
   "repository": {
     "type": "git",
