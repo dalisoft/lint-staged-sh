@@ -1,0 +1,4 @@
+shell=sh
+exclude=node_modules
+extended-analysis=true
+severity=style
