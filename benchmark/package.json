@@ -4,14 +4,12 @@
     "prepare": "lefthook install"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.7.0",
-    "@stoplight/spectral-cli": "^6.11.1",
     "binary2npm": "^0.3.2",
-    "dprint-rs-npm": "^0.45.1",
-    "jsona-rs-npm": "^0.6.0",
-    "lefthook": "^1.6.10",
+    "biome-rs-npm": "dalisoft/biome-rs-npm#v1.7.1",
+    "dprint-rs-npm": "dalisoft/dprint-rs-npm#0.45.1",
+    "lefthook-go-npm": "dalisoft/lefthook-go-npm#v1.6.10",
     "lint-staged": "^15.2.2",
-    "markdownlint-cli2": "^0.13.0",
     "prettier": "^3.2.5"
-  }
+  },
+  "trustedDependencies": ["biome-rs-npm", "dprint-rs-npm", "lefthook-go-npm"]
 }

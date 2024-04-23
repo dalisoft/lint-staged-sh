@@ -3,25 +3,17 @@ pre-commit:
   follow: true
   commands:
     biome-linter:
-      glob: "*.{js,jsx,ts,tsx}"
+      glob: "*.{js,jsx,ts,tsx,json}"
       exclude: "node_modules"
       run: ./node_modules/.bin/biome format {staged_files}
     spectral-linter:
       glob: "*.yaml"
       exclude: "node_modules"
       run: ./node_modules/.bin/spectral lint --ignore-unknown-format {staged_files}
-    md-cli-linter:
-      glob: "*.md"
-      exclude: "node_modules"
-      run: ./node_modules/.bin/markdownlint-cli2 {staged_files}
     md-linter:
       glob: "*.md"
       exclude: "node_modules"
       run: ./node_modules/.bin/dprint check {staged_files}
-    jsona-linter:
-      glob: "*.json"
-      exclude: "node_modules"
-      run: ./node_modules/.bin/jsona fmt --option trailing_newline=true --check {staged_files}
     prettier-formatter:
       glob: "*.{js,jsx,ts,tsx,yaml}"
       exclude: "node_modules"

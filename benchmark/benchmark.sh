@@ -13,12 +13,6 @@ setup() {
   git commit -m "initial commit"
 
   git add -Af package.json README.md
-
-  if [ ! -f "./lefthook" ] && [ "$(command -v bun)" ]; then
-    bun install
-    bun run lefthook.js
-  fi
-
 }
 
 cleanup() {
@@ -30,4 +24,4 @@ export -f setup
 # shellcheck disable=SC3045
 export -f cleanup
 
-hyperfine --runs 10 --warmup 3 '../lint-staged.sh' 'lint-staged' 'lefthook run pre-commit' './lefthook run pre-commit' --export-markdown "result.md" --setup setup --cleanup cleanup
+hyperfine --runs 10 --warmup 3 '../lint-staged.sh' 'lint-staged' 'lefthook run pre-commit' --export-markdown "result.md" --setup setup --cleanup cleanup
