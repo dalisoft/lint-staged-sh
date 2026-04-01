@@ -9,8 +9,8 @@
   "author": "Davlatjon Shavkatov <opensource@dalisoft.uz>",
   "keywords": ["git", "staged", "linter", "workflow"],
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.6.10",
-    "@ls-lint/ls-lint": "^2.2.3"
+    "@evilmartians/lefthook": "^2.1.4",
+    "@ls-lint/ls-lint": "^2.3.1"
   },
   "trustedDependencies": ["@evilmartians/lefthook"],
   "repository": {
