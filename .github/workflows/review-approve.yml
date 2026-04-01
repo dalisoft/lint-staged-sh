@@ -1,4 +1,4 @@
-name: Approve author PR
+name: Approve author & dependabot PR
 
 on: pull_request_target
 
