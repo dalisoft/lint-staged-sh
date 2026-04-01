@@ -18,7 +18,13 @@ jobs:
       - run: |
           gh pr review ${{ env.PR_NUMBER }} --comment -b "LGTM!"
           gh pr review ${{ env.PR_NUMBER }} --approve
-          gh pr merge ${{ env.PR_NUMBER }} --squash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.number }}
+      - run: |
+          gh pr review ${{ env.PR_NUMBER }} --comment -b "LGTM!"
+          gh pr review ${{ env.PR_NUMBER }} --approve
+          gh pr merge ${{ env.PR_NUMBER }} --squash
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           PR_NUMBER: ${{ github.event.number }}
