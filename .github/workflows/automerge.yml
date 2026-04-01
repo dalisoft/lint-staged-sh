@@ -8,6 +8,10 @@ jobs:
 
     runs-on: ubuntu-22.04
     if: github.actor == 'dependabot[bot]'
+    permissions:
+      contents: read
+      issues: read
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v6
