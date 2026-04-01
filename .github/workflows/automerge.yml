@@ -16,7 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: |
-          gh pr review --approve --comment -b "LGTM!"
+          gh pr review --comment -b "LGTM!"
+          gh pr review --approve
           gh pr merge --squash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
