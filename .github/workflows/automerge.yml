@@ -11,13 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
-      - uses: ahmadnassri/action-dependabot-auto-merge@v2
-        with:
-          target: minor
-          approve: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          command: squash and merge
       - run: gh pr review --approve --comment -b "LGTM!"
       - run: gh pr merge --squash
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
