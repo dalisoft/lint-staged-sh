@@ -17,3 +17,7 @@ jobs:
           approve: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           command: squash and merge
+      - run: gh pr review --approve --comment -b "LGTM!"
+      - run: gh pr merge --squash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
